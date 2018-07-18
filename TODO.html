@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+    <meta charset="UTF-8">
+    <title>assignment 1</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+</head>
+<body>
+<div class="container" ng-controller="SimpleController" >
+  <h2>MY TODO LIST </h2>
+    <input type="text" ng-model="newtask">
+    <input type="button" value="submit" ng-click="add()">
+    <br/><br/><br/>
+    <div data-ng-repeat="foo in obj">
+    <input type="checkbox" name="cb1" value="cb1" ng-model="foo.mark"> {{foo.task}}  <br/><br/>
+    </div>
+    <input type="button" value="remove marked" ng-click="removal()">
+
+</div>
+<script>
+var app = angular.module('myApp', []);
+app.controller('SimpleController', function($scope) {
+    $scope.obj=[ {task : 'clean house', mark:false } ];
+    $scope.add= function () {
+        $scope.obj.push({ task: $scope.newtask, mark:false });
+
+    };
+
+    $scope.removal= function () {
+            var old=$scope.obj;
+        $scope.obj=[];
+        angular.forEach(old,function(x){
+             if(x.mark==false){
+                 $scope.obj.push(x);
+             }
+        });
+
+
+    }
+});
+
+</script>
+</body>
+</html>
